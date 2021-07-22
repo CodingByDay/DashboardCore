@@ -26,6 +26,7 @@ namespace WebDashboardAspNetCore3
         public void ConfigureServices(IServiceCollection services)
         {
             // Configures services to use the Web Dashboard Control.
+
             services
                 .AddDevExpressControls()
                 .AddControllersWithViews();
@@ -33,6 +34,7 @@ namespace WebDashboardAspNetCore3
             services.AddSession();
             services.AddHttpContextAccessor();
             services.AddSingleton<DashboardConfigurator, MultiTenantDashboardConfigurator>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+<!-- Add the following namespace usages: -->
+@using DevExpress.AspNetCore
+@using DevExpress.DashboardWeb
+@using DevExpress.DashboardAspNetCore
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Add bundled resources. -->
+    <link href="~/css/site.min.css" rel="stylesheet" />
+    <script src="~/js/site.min.js"></script>
+    <script>
+        function onBeforeRender(sender) {
+            var dashboardControl = sender;
+            // ...
+            dashboardControl.registerExtension(new DevExpress.Dashboard.DashboardPanelExtension(dashboardControl));
+        }
+        $(document).keypress(function (e) { if (e.keyCode === 13) { e.preventDefault(); return false; } });
+
+        $(function () {
+
+            $(':text').bind('keydown', function (e) { //on keydown for all textboxes
+
+                if (e.keyCode == 13) // if this is enter key
+
+                    e.preventDefault();
+
+            });
+
+        });  </script>
+</head>
+<body>
+    <!-- Add the Web Dashboard with the "clientDashboardControl1" name to a View, specify its size, and set the Working Mode to Designer. -->
+    <div style="position: absolute; left:0;top:0;right:0;bottom:0;">
+        @(Html.DevExpress().Dashboard("clientDashboardControl1")
+        .WorkingMode(WorkingMode.Designer)
+        .Width("100%")
+        .Height("100%")
+        .OnBeforeRender("onBeforeRender")
+
+        )
+    </div>
+</body>
+</html>

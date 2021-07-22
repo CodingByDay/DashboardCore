@@ -15,9 +15,18 @@ namespace WebDashboardAspNetCore3.Controllers {
         public HomeController(ILogger<HomeController> logger) {
             _logger = logger;
         }
+
+
+        /// <summary>
+        ///  Controller for the index.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Index(int id) {
+
             HttpContext.Session.SetString("user", id.ToString());
+
             return View();
         }
 

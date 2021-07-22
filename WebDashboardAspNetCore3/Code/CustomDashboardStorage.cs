@@ -1,6 +1,7 @@
 ﻿using DevExpress.DashboardWeb;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,18 +18,36 @@ public class CustomDashboardStorage : IEditableDashboardStorage {
 
     public IEnumerable<DashboardInfo> GetAvailableDashboardsInfo() {
         var dashboardInfos = new List<DashboardInfo>();
+        var adminInfos = new List<DashboardInfo>();
+        
 
-        var files = Directory.GetFiles(dashboardStorageFolder, "*.xml");
+        var userName = contextAccessor.HttpContext.Session.GetString("user"); // User name.
+        if (userName == Guid.Empty.ToString())
+        {
+            var files = Directory.GetFiles(dashboardStorageFolder, "*.xml");
 
-        foreach (var item in files) {
-            var name = Path.GetFileNameWithoutExtension(item);
-            var userName = contextAccessor.HttpContext.Session.GetString("user");
-            var debug = 3;
-            if (!string.IsNullOrEmpty(userName) && name.EndsWith(userName, System.StringComparison.InvariantCultureIgnoreCase))
-                dashboardInfos.Add(new DashboardInfo() { ID = name, Name = name });
+            foreach (var item in files)
+            {
+                var name = Path.GetFileNameWithoutExtension(item); // Dashboard name.
+                adminInfos.Add(new DashboardInfo() { ID = name, Name = name }); // Appends the user ID to the end of the name dashboard name.
+            }
+            return adminInfos;
         }
+        else
+        {
+            var files = Directory.GetFiles(dashboardStorageFolder, "*.xml");
 
-        return dashboardInfos;
+            foreach (var item in files)
+            {
+                var name = Path.GetFileNameWithoutExtension(item); // Dashboard name.
+                var regularUser = contextAccessor.HttpContext.Session.GetString("user"); // User name.
+
+                if (!string.IsNullOrEmpty(regularUser) && name.EndsWith(regularUser, System.StringComparison.InvariantCultureIgnoreCase))
+                    dashboardInfos.Add(new DashboardInfo() { ID = name, Name = name }); // Appends the user ID to the end of the name dashboard name.
+            }
+
+            return dashboardInfos;
+        }
     }
 
     public XDocument LoadDashboard(string dashboardID) {
@@ -45,8 +64,8 @@ public class CustomDashboardStorage : IEditableDashboardStorage {
     public string AddDashboard(XDocument dashboard, string dashboardName) {
         var userName = contextAccessor.HttpContext.Session.GetString("user");
 
-        if (string.IsNullOrEmpty(userName) || userName != "Admin")
-            throw new System.ApplicationException("You are not authorized to add dashboards.");
+        // if (string.IsNullOrEmpty(userName) || userName != "Admin")
+           // throw new System.ApplicationException("You are not authorized to add dashboards.");
 
         var path = Path.Combine(dashboardStorageFolder, dashboardName + "_" + userName + ".xml");
 
@@ -56,11 +75,12 @@ public class CustomDashboardStorage : IEditableDashboardStorage {
     }
 
     public void SaveDashboard(string dashboardID, XDocument dashboard) {
-        var userName = contextAccessor.HttpContext.Session.GetString("user");
+        var userName = contextAccessor.HttpContext.Session.GetString("user"); // Username
 
-        if (string.IsNullOrEmpty(userName) || userName != "Admin")
-            throw new System.ApplicationException("You are not authorized to save dashboards.");
-
+        // if (string.IsNullOrEmpty(userName) || userName != "Admin")
+        // throw new System.ApplicationException("You are not authorized to save dashboards.");
+        string appended = $"{dashboardID}{userName}";
+        var something=9;
         var path = Path.Combine(dashboardStorageFolder, dashboardID + ".xml");
 
         File.WriteAllText(path, dashboard.ToString());

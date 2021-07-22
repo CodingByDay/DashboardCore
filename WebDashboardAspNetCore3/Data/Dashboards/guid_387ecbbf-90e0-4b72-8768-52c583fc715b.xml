@@ -1,0 +1,44 @@
+<Dashboard>
+  <Title Text="guid" />
+  <DataSources>
+    <SqlDataSource Name="ProjectDocument" ComponentName="sqlDataSource1">
+      <Connection Name="zenas" FromAppConfig="true" />
+      <Query Type="SelectQuery" Name="ProjectDocument">
+        <Tables>
+          <Table Name="ProjectDocument" />
+        </Tables>
+        <Columns>
+          <AllColumns Table="ProjectDocument" />
+          <Column Table="ProjectDocument" Name="ProjectDocumentGUID" />
+          <Column Table="ProjectDocument" Name="ProjectGUID" />
+          <Column Table="ProjectDocument" Name="ProjectDocumentThreadGUID" />
+          <Column Table="ProjectDocument" Name="DocumentName" />
+          <Column Table="ProjectDocument" Name="DocumentTypeGUID" />
+          <Column Table="ProjectDocument" Name="DocumentDescription" />
+          <Column Table="ProjectDocument" Name="DocumentVersion" />
+          <Column Table="ProjectDocument" Name="DocumentContent" />
+          <Column Table="ProjectDocument" Name="DocumentSize" />
+          <Column Table="ProjectDocument" Name="UploadedByGUID" />
+          <Column Table="ProjectDocument" Name="UploadedAt" />
+          <Column Table="ProjectDocument" Name="IsDeleted" />
+        </Columns>
+      </Query>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Pie ComponentName="pieDashboardItem1" Name="Pies 1" DataSource="sqlDataSource1" DataMember="ProjectDocument">
+      <DataItems>
+        <Measure DataMember="DocumentName" SummaryType="Count" DefaultId="DataItem0" />
+      </DataItems>
+      <Values>
+        <Value DefaultId="DataItem0" />
+      </Values>
+    </Pie>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutItem DashboardItem="pieDashboardItem1" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>
