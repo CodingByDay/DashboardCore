@@ -64,8 +64,6 @@ public class CustomDashboardStorage : IEditableDashboardStorage {
     public string AddDashboard(XDocument dashboard, string dashboardName) {
         var userName = contextAccessor.HttpContext.Session.GetString("user");
 
-        // if (string.IsNullOrEmpty(userName) || userName != "Admin")
-           // throw new System.ApplicationException("You are not authorized to add dashboards.");
 
         var path = Path.Combine(dashboardStorageFolder, dashboardName + "_" + userName + ".xml");
 
@@ -79,8 +77,10 @@ public class CustomDashboardStorage : IEditableDashboardStorage {
 
         // if (string.IsNullOrEmpty(userName) || userName != "Admin")
         // throw new System.ApplicationException("You are not authorized to save dashboards.");
+
         string appended = $"{dashboardID}{userName}";
-        var something=9;
+
+        // Appends the guid to the end of th identiier for the dashboard.
         var path = Path.Combine(dashboardStorageFolder, dashboardID + ".xml");
 
         File.WriteAllText(path, dashboard.ToString());
