@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\janko\\Desktop\\DashboardCore\\CS\\WebDashboardAspNetCore3\\WebDashboardAspNetCore3.csproj": {}
+    "C:\\Users\\janko\\Desktop\\zenasdash\\DashboardCore\\WebDashboardAspNetCore3\\WebDashboardAspNetCore3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\janko\\Desktop\\DashboardCore\\CS\\WebDashboardAspNetCore3\\WebDashboardAspNetCore3.csproj": {
+    "C:\\Users\\janko\\Desktop\\zenasdash\\DashboardCore\\WebDashboardAspNetCore3\\WebDashboardAspNetCore3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\janko\\Desktop\\DashboardCore\\CS\\WebDashboardAspNetCore3\\WebDashboardAspNetCore3.csproj",
+        "projectUniqueName": "C:\\Users\\janko\\Desktop\\zenasdash\\DashboardCore\\WebDashboardAspNetCore3\\WebDashboardAspNetCore3.csproj",
         "projectName": "WebDashboardAspNetCore3",
-        "projectPath": "C:\\Users\\janko\\Desktop\\DashboardCore\\CS\\WebDashboardAspNetCore3\\WebDashboardAspNetCore3.csproj",
+        "projectPath": "C:\\Users\\janko\\Desktop\\zenasdash\\DashboardCore\\WebDashboardAspNetCore3\\WebDashboardAspNetCore3.csproj",
         "packagesPath": "C:\\Users\\janko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\janko\\Desktop\\DashboardCore\\CS\\WebDashboardAspNetCore3\\obj\\",
+        "outputPath": "C:\\Users\\janko\\Desktop\\zenasdash\\DashboardCore\\WebDashboardAspNetCore3\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
@@ -54,6 +54,10 @@
             "DevExpress.AspNetCore.Dashboard": {
               "target": "Package",
               "version": "[19.2.12, )"
+            },
+            "Microsoft.AspNetCore.HttpOverrides": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             }
           },
           "imports": [
